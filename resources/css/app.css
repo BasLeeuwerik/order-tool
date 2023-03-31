@@ -1,3 +1,69 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.admin_page_container {
+    @apply max-w-7xl mx-auto sm:px-6 lg:px-8;
+}
+
+.admin_page_header {
+    @apply font-semibold text-xl text-gray-800 leading-tight;
+}
+
+.admin_page_container .content {
+    @apply py-6;
+}
+
+.admin_table_container {
+    @apply overflow-x-auto relative shadow-md sm:rounded-lg;
+}
+
+.admin_table_container table {
+    @apply table-auto text-left w-full text-sm text-left text-gray-500;
+}
+
+.admin_table_container table thead {
+    @apply text-xs text-gray-700 uppercase;
+}
+
+.admin_table_container table thead th {
+    @apply bg-gray-200 py-3 px-6;
+}
+
+.admin_table_container table tr {
+    @apply bg-white border-b hover:bg-gray-50;
+}
+
+.admin_table_container table tr td {
+    @apply py-4 px-6;
+}
+
+.link_button {
+    @apply inline-flex items-center px-4 py-2 bg-white border border-gray-300 rounded-md font-semibold text-xs text-gray-700 uppercase tracking-widest shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 disabled:opacity-25 transition ease-in-out duration-150;
+}
+
+.admin_info_table_container {
+    @apply bg-white sm:rounded-lg;
+}
+
+.admin_info_table_container table {
+    @apply table-auto text-left;
+}
+
+.admin_info_table_container table tr th {
+    @apply py-1 px-4;
+}
+
+.admin_form_container {
+    @apply bg-white overflow-hidden shadow-sm sm:rounded-lg;
+}
+
+.admin_form_container .content {
+    @apply px-6;
+}
+
+
+.admin_form_container .input_group {
+    @apply mt-4;
+}
+

@@ -35,6 +35,10 @@ class RolePermissionSeeder extends Seeder
 
             Permission::create(['name' => PermissionType::ADMIN_DISCOUNT_CODE_LIST]),
             Permission::create(['name' => PermissionType::ADMIN_DISCOUNT_CODE_READ]),
+
+            Permission::create(['name' => PermissionType::ADMIN_PRODUCT_LIST]),
+            Permission::create(['name' => PermissionType::ADMIN_PRODUCT_READ]),
+            Permission::create(['name' => PermissionType::ADMIN_PRODUCT_UPDATE]),
         ];
 
         $adminRole->syncPermissions($adminPermissions);

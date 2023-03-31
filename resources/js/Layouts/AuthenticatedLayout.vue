@@ -1,19 +1,19 @@
 <script setup>
-import { ref } from 'vue';
+import {ref} from 'vue';
 import ApplicationLogo from '@/Components/ApplicationLogo.vue';
 import Dropdown from '@/Components/Dropdown.vue';
 import DropdownLink from '@/Components/DropdownLink.vue';
 import NavLink from '@/Components/NavLink.vue';
 import ResponsiveNavLink from '@/Components/ResponsiveNavLink.vue';
-import { Link } from '@inertiajs/vue3';
+import {Link} from '@inertiajs/inertia-vue3';
 
 const showingNavigationDropdown = ref(false);
 </script>
 
 <template>
     <div>
-        <div class="min-h-screen bg-gray-100 dark:bg-gray-900">
-            <nav class="bg-white dark:bg-gray-800 border-b border-gray-100 dark:border-gray-700">
+        <div class="min-h-screen bg-gray-100">
+            <nav class="bg-white border-b border-gray-100">
                 <!-- Primary Navigation Menu -->
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div class="flex justify-between h-16">
@@ -22,15 +22,107 @@ const showingNavigationDropdown = ref(false);
                             <div class="shrink-0 flex items-center">
                                 <Link :href="route('dashboard')">
                                     <ApplicationLogo
-                                        class="block h-9 w-auto fill-current text-gray-800 dark:text-gray-200"
+                                        class="block h-9 w-auto fill-current text-gray-800"
                                     />
                                 </Link>
                             </div>
 
                             <!-- Navigation Links -->
                             <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                                <NavLink :href="route('dashboard')" :active="route().current('dashboard')">
-                                    Dashboard
+                                <NavLink
+                                    v-if="hasPermission($page.props.auth.permissions, 'admin_purchase_order_list')"
+                                    :active="route().current('admin.purchase_order.index')"
+                                    :href="route('admin.purchase_order.index')"
+                                >
+                                    Orders
+                                </NavLink>
+
+                                <NavLink
+                                    v-if="hasPermission($page.props.auth.permissions, 'admin_company_list')"
+                                    :active="route().current('admin.company.index')"
+                                    :href="route('admin.company.index')"
+                                >
+                                    Companies
+                                </NavLink>
+
+                                <NavLink
+                                    v-if="hasPermission($page.props.auth.permissions, 'admin_user_list')"
+                                    :active="route().current('admin.user.index')"
+                                    :href="route('admin.user.index')"
+                                >
+                                    Users
+                                </NavLink>
+
+                                <NavLink
+                                    v-if="hasPermission($page.props.auth.permissions, 'admin_quotation_list')"
+                                    :active="route().current('admin.quotation.index')"
+                                    :href="route('admin.quotation.index')"
+                                >
+                                    Quotations
+                                </NavLink>
+
+                                <NavLink
+                                    v-if="hasPermission($page.props.auth.permissions, 'admin_invoice_list')"
+                                    :active="route().current('admin.invoice.index')"
+                                    :href="route('admin.invoice.index')"
+                                >
+                                    Invoices
+                                </NavLink>
+
+                                <NavLink
+                                    v-if="hasPermission($page.props.auth.permissions, 'admin_discount_code_list')"
+                                    :active="route().current('admin.discount_code.index')"
+                                    :href="route('admin.discount_code.index')"
+                                >
+                                    Discount Codes
+                                </NavLink>
+
+                                <NavLink
+                                    v-if="hasPermission($page.props.auth.permissions, 'admin_product_list')"
+                                    :active="route().current('admin.product.index')"
+                                    :href="route('admin.product.index')"
+                                >
+                                    Products
+                                </NavLink>
+
+                                <NavLink
+                                    v-if="hasPermission($page.props.auth.permissions, 'client_purchase_order_list')"
+                                    :active="route().current('client.purchase_order.index')"
+                                    :href="route('client.purchase_order.index')"
+                                >
+                                    Orders
+                                </NavLink>
+
+                                <NavLink
+                                    v-if="hasPermission($page.props.auth.permissions, 'client_quotation_list')"
+                                    :active="route().current('client.quotation.index')"
+                                    :href="route('client.quotation.index')"
+                                >
+                                    Quotations
+                                </NavLink>
+
+                                <NavLink
+                                    v-if="hasPermission($page.props.auth.permissions, 'client_company_read')"
+                                    :active="route().current('client.company.show')"
+                                    :href="route('client.company.show')"
+                                >
+                                    My company
+                                </NavLink>
+
+                                <NavLink
+                                    v-if="hasPermission($page.props.auth.permissions, 'client_user_list')"
+                                    :active="route().current('client.user.index')"
+                                    :href="route('client.user.index')"
+                                >
+                                    Users
+                                </NavLink>
+
+                                <NavLink
+                                    v-if="hasPermission($page.props.auth.permissions, 'client_invoice_list')"
+                                    :active="route().current('client.invoice.index')"
+                                    :href="route('client.invoice.index')"
+                                >
+                                    Invoices
                                 </NavLink>
                             </div>
                         </div>
@@ -42,21 +134,21 @@ const showingNavigationDropdown = ref(false);
                                     <template #trigger>
                                         <span class="inline-flex rounded-md">
                                             <button
+                                                class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150"
                                                 type="button"
-                                                class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 dark:text-gray-400 bg-white dark:bg-gray-800 hover:text-gray-700 dark:hover:text-gray-300 focus:outline-none transition ease-in-out duration-150"
                                             >
-                                                {{ $page.props.auth.user.name }}
+                                                {{ $page.props.auth.user.full_name }}
 
                                                 <svg
                                                     class="ml-2 -mr-0.5 h-4 w-4"
-                                                    xmlns="http://www.w3.org/2000/svg"
-                                                    viewBox="0 0 20 20"
                                                     fill="currentColor"
+                                                    viewBox="0 0 20 20"
+                                                    xmlns="http://www.w3.org/2000/svg"
                                                 >
                                                     <path
-                                                        fill-rule="evenodd"
-                                                        d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
                                                         clip-rule="evenodd"
+                                                        d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                                                        fill-rule="evenodd"
                                                     />
                                                 </svg>
                                             </button>
@@ -64,8 +156,8 @@ const showingNavigationDropdown = ref(false);
                                     </template>
 
                                     <template #content>
-                                        <DropdownLink :href="route('profile.edit')"> Profile </DropdownLink>
-                                        <DropdownLink :href="route('logout')" method="post" as="button">
+                                        <DropdownLink :href="route('profile.edit')"> Profile</DropdownLink>
+                                        <DropdownLink :href="route('logout')" as="button" method="post">
                                             Log Out
                                         </DropdownLink>
                                     </template>
@@ -76,29 +168,29 @@ const showingNavigationDropdown = ref(false);
                         <!-- Hamburger -->
                         <div class="-mr-2 flex items-center sm:hidden">
                             <button
+                                class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 focus:text-gray-500 transition duration-150 ease-in-out"
                                 @click="showingNavigationDropdown = !showingNavigationDropdown"
-                                class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 dark:text-gray-500 hover:text-gray-500 dark:hover:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-900 focus:outline-none focus:bg-gray-100 dark:focus:bg-gray-900 focus:text-gray-500 dark:focus:text-gray-400 transition duration-150 ease-in-out"
                             >
-                                <svg class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
+                                <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path
                                         :class="{
                                             hidden: showingNavigationDropdown,
                                             'inline-flex': !showingNavigationDropdown,
                                         }"
+                                        d="M4 6h16M4 12h16M4 18h16"
                                         stroke-linecap="round"
                                         stroke-linejoin="round"
                                         stroke-width="2"
-                                        d="M4 6h16M4 12h16M4 18h16"
                                     />
                                     <path
                                         :class="{
                                             hidden: !showingNavigationDropdown,
                                             'inline-flex': showingNavigationDropdown,
                                         }"
+                                        d="M6 18L18 6M6 6l12 12"
                                         stroke-linecap="round"
                                         stroke-linejoin="round"
                                         stroke-width="2"
-                                        d="M6 18L18 6M6 6l12 12"
                                     />
                                 </svg>
                             </button>
@@ -112,23 +204,120 @@ const showingNavigationDropdown = ref(false);
                     class="sm:hidden"
                 >
                     <div class="pt-2 pb-3 space-y-1">
-                        <ResponsiveNavLink :href="route('dashboard')" :active="route().current('dashboard')">
+                        <ResponsiveNavLink :active="route().current('dashboard')" :href="route('dashboard')">
                             Dashboard
+                        </ResponsiveNavLink>
+
+                        <ResponsiveNavLink
+                            v-if="hasPermission($page.props.auth.permissions, 'admin_purchase_order_list')"
+                            :active="route().current('admin.purchase_order.index')"
+                            :href="route('admin.purchase_order.index')"
+                        >
+                            Orders
+                        </ResponsiveNavLink>
+
+                        <ResponsiveNavLink
+                            v-if="hasPermission($page.props.auth.permissions, 'admin_company_list')"
+                            :active="route().current('admin.company.index')"
+                            :href="route('admin.company.index')"
+                        >
+                            Companies
+                        </ResponsiveNavLink>
+
+                        <ResponsiveNavLink
+                            v-if="hasPermission($page.props.auth.permissions, 'admin_user_list')"
+                            :active="route().current('admin.user.index')"
+                            :href="route('admin.user.index')"
+                        >
+                            Users
+                        </ResponsiveNavLink>
+
+                        <ResponsiveNavLink
+                            v-if="hasPermission($page.props.auth.permissions, 'admin_quotation_list')"
+                            :active="route().current('admin.quotation.index')"
+                            :href="route('admin.quotation.index')"
+                        >
+                            Quotations
+                        </ResponsiveNavLink>
+
+                        <ResponsiveNavLink
+                            v-if="hasPermission($page.props.auth.permissions, 'admin_invoice_list')"
+                            :active="route().current('admin.invoice.index')"
+                            :href="route('admin.invoice.index')"
+                        >
+                            Invoices
+                        </ResponsiveNavLink>
+
+                        <ResponsiveNavLink
+                            v-if="hasPermission($page.props.auth.permissions, 'admin_discount_code_list')"
+                            :active="route().current('admin.discount_code.index')"
+                            :href="route('admin.discount_code.index')"
+                        >
+                            Discount Codes
+                        </ResponsiveNavLink>
+
+
+                        <ResponsiveNavLink
+                            v-if="hasPermission($page.props.auth.permissions, 'admin_product_list')"
+                            :active="route().current('admin.product.index')"
+                            :href="route('admin.product.index')"
+                        >
+                            Products
+                        </ResponsiveNavLink>
+
+                        <ResponsiveNavLink
+                            v-if="hasPermission($page.props.auth.permissions, 'client_purchase_order_list')"
+                            :active="route().current('client.purchase_order.index')"
+                            :href="route('client.purchase_order.index')"
+                        >
+                            Orders
+                        </ResponsiveNavLink>
+
+                        <ResponsiveNavLink
+                            v-if="hasPermission($page.props.auth.permissions, 'client_quotation_list')"
+                            :active="route().current('client.quotation.index')"
+                            :href="route('client.quotation.index')"
+                        >
+                            Quotations
+                        </ResponsiveNavLink>
+
+                        <ResponsiveNavLink
+                            v-if="hasPermission($page.props.auth.permissions, 'client_company_read')"
+                            :active="route().current('client.company.show')"
+                            :href="route('client.company.show')"
+                        >
+                            My company
+                        </ResponsiveNavLink>
+
+                        <ResponsiveNavLink
+                            v-if="hasPermission($page.props.auth.permissions, 'client_invoice_list')"
+                            :active="route().current('client.invoice.index')"
+                            :href="route('client.invoice.index')"
+                        >
+                            Invoices
+                        </ResponsiveNavLink>
+
+                        <ResponsiveNavLink
+                            v-if="hasPermission($page.props.auth.permissions, 'client_user_list')"
+                            :active="route().current('client.user.index')"
+                            :href="route('client.user.index')"
+                        >
+                            Users
                         </ResponsiveNavLink>
                     </div>
 
                     <!-- Responsive Settings Options -->
-                    <div class="pt-4 pb-1 border-t border-gray-200 dark:border-gray-600">
+                    <div class="pt-4 pb-1 border-t border-gray-200">
                         <div class="px-4">
-                            <div class="font-medium text-base text-gray-800 dark:text-gray-200">
+                            <div class="font-medium text-base text-gray-800">
                                 {{ $page.props.auth.user.name }}
                             </div>
                             <div class="font-medium text-sm text-gray-500">{{ $page.props.auth.user.email }}</div>
                         </div>
 
                         <div class="mt-3 space-y-1">
-                            <ResponsiveNavLink :href="route('profile.edit')"> Profile </ResponsiveNavLink>
-                            <ResponsiveNavLink :href="route('logout')" method="post" as="button">
+                            <ResponsiveNavLink :href="route('profile.edit')"> Profile</ResponsiveNavLink>
+                            <ResponsiveNavLink :href="route('logout')" as="button" method="post">
                                 Log Out
                             </ResponsiveNavLink>
                         </div>
@@ -137,15 +326,23 @@ const showingNavigationDropdown = ref(false);
             </nav>
 
             <!-- Page Heading -->
-            <header class="bg-white dark:bg-gray-800 shadow" v-if="$slots.header">
+            <header v-if="$slots.header" class="bg-white shadow">
                 <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-                    <slot name="header" />
+                    <slot name="header"/>
                 </div>
             </header>
 
             <!-- Page Content -->
             <main>
-                <slot />
+                <div class="admin_page_container">
+                    <div class="content">
+                        <div v-if="$page.props.flash.message" class="alert mb-4">
+                            {{ $page.props.flash.message }}
+                        </div>
+
+                        <slot/>
+                    </div>
+                </div>
             </main>
         </div>
     </div>

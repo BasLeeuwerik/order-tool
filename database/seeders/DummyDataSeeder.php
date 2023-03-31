@@ -22,7 +22,7 @@ class DummyDataSeeder extends Seeder
             'first_name' => 'Admin',
             'last_name' => 'User',
             'locale' => 'nl_NL',
-            'email' => 'admin@transfercompany.com',
+            'email' => 'admin@testcompany.com',
         ]);
 
         $adminUser->assignRole([
@@ -33,7 +33,7 @@ class DummyDataSeeder extends Seeder
             'first_name' => 'Super Admin',
             'last_name' => 'User',
             'locale' => 'nl_NL',
-            'email' => 'super_admin@transfercompany.com',
+            'email' => 'super_admin@testcompany.com',
         ]);
 
         $superAdminUser->assignRole([
@@ -45,15 +45,15 @@ class DummyDataSeeder extends Seeder
             'first_name' => 'Test',
             'last_name' => 'User',
             'locale' => 'nl_NL',
-            'email' => 'user@transfercompany.com',
+            'email' => 'user@testcompany.com',
         ]);
 
-        $transferCompany = CompanyFactory::new()
+        $testCompany = CompanyFactory::new()
             ->has(CompanyLocationFactory::new()
                 ->count(1), 'locations')
             ->create([
-                'name' => 'Transfercompany',
-                'type' => CompanyType::TRANSFERCOMPANY
+                'name' => 'Testcompany',
+                'type' => CompanyType::TESTCOMPANY,
             ]);
 
         $clientCompany = CompanyFactory::new()

@@ -15,17 +15,19 @@ defineExpose({focus: () => input.value.focus()});
 </script>
 
 <template>
-    <div class="radio-button-group">
-        <label :for="value" v-for="(label, value) in options">
-            <input
-                :checked="modelValue === value"
-                type="radio"
-                :name="name"
-                :value="value"
-                :id="value"
-                @change="$emit('update:modelValue', $event.target.value)"
-            />
-            {{ label }}
-        </label>
+    <div class="flex flex-col">
+        <template v-for="(label, value) in options">
+            <label :for="value + label">
+                <input
+                    :id="value + label"
+                    :checked="modelValue === value"
+                    :name="name"
+                    :value="value"
+                    type="radio"
+                    @change="$emit('update:modelValue', $event.target.value)"
+                />
+                {{ label }}
+            </label>
+        </template>
     </div>
 </template>

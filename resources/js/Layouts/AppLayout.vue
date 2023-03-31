@@ -106,7 +106,7 @@ const showingNavigationDropdown = ref(false);
 
                         <div class="hidden sm:flex sm:items-center sm:ml-6">
                             <!-- Settings Dropdown -->
-                            <div class="ml-3 relative" v-if="$page.props.auth.user">
+                            <div v-if="$page.props.auth.user" class="ml-3 relative">
                                 <Dropdown align="right" width="48">
                                     <template #trigger>
                                         <span class="inline-flex rounded-md">
@@ -142,18 +142,18 @@ const showingNavigationDropdown = ref(false);
                                 </Dropdown>
                             </div>
 
-                            <div class="ml-3 relative" v-if="!$page.props.auth.user">
+                            <div v-if="!$page.props.auth.user" class="ml-3 relative">
                                 <PrimaryButton
                                     class="mr-2"
-                                    type="button"
                                     onclick="window.location.href='register'"
+                                    type="button"
                                 >
                                     Register
                                 </PrimaryButton>
 
                                 <PrimaryButton
-                                    type="button"
                                     onclick="window.location.href='login'"
+                                    type="button"
                                 >
                                     Login
                                 </PrimaryButton>
