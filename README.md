@@ -7,6 +7,15 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
 
+## Information for this project
+
+This project was made with Laravel, Docker and Vue.js. To run it, use:
+sail up
+npm run dev
+sail artisan migrate:fresh --seed
+
+To login, please use the test accounts which can be found in the DummyDataSeeder file!
+
 ## About Laravel
 
 Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
