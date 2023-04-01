@@ -10,8 +10,11 @@
 ## Information for this project
 
 This project was made with Laravel, Docker and Vue.js. To run it, use:
+- composer install
 - sail up
+- npm install
 - npm run dev
+- set your environment variables in your .env
 - sail artisan migrate:fresh --seed
 
 - To login, please use the test accounts which can be found in the DummyDataSeeder file!
