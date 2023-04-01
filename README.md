@@ -10,11 +10,11 @@
 ## Information for this project
 
 This project was made with Laravel, Docker and Vue.js. To run it, use:
-sail up
-npm run dev
-sail artisan migrate:fresh --seed
+- sail up
+- npm run dev
+- sail artisan migrate:fresh --seed
 
-To login, please use the test accounts which can be found in the DummyDataSeeder file!
+- To login, please use the test accounts which can be found in the DummyDataSeeder file!
 
 ## About Laravel
 
